@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_25_140030) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "merchant_reference", null: false
+    t.integer "merchant_id", null: false
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.date "creation_date", null: false
     t.integer "disbursement_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_25_140030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["disbursement_id"], name: "disbursement_id_index"
-    t.index ["merchant_reference"], name: "index_orders_on_merchant_reference"
+    t.index ["merchant_id"], name: "index_orders_on_merchant_id"
   end
 
   create_table "scheduled_tasks", force: :cascade do |t|

@@ -16,8 +16,16 @@ RSpec.describe "/orders", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Order. As you add validations to Order, be sure to
   # adjust the attributes here as well.
+  let(:merchant) { create(:merchant) }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      merchant_reference: "treutel_schumm_fadel",
+      amount: 61.74,
+      creation_date: 2023-01-01,
+      disbursement_id: nil,
+      id_key:"056d024481a9",
+      fee: nil
+    }
   }
 
   let(:invalid_attributes) {

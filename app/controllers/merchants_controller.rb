@@ -46,6 +46,6 @@ class MerchantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def merchant_params
-      params.require(:merchant).permit(:reference, :email, :live_on, :disbursement_frequency, :minimum_monthy_fee, :id_key, :monthy_fee_payment)
+      params.require(:merchant).permit(:reference, :email, :live_on, :disbursement_frequency, :minimum_monthly_fee, :id_key, :monthly_fee_payment)
     end
 end

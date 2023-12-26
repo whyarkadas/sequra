@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_25_140030) do
 
   create_table "scheduled_tasks", force: :cascade do |t|
     t.integer "merchant_id", null: false
-    t.date "scheduled_at"
+    t.datetime "scheduled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["merchant_id"], name: "unique_merchant_task", unique: true

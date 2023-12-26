@@ -1,7 +1,6 @@
 class Disbursement < ApplicationRecord
-  belongs_to :merchant
+  belongs_to :merchant, optional: false
   has_many :orders
 
-  # TODO: Check this ?
-  enum :month => Date::MONTHNAMES
+  # TODO: Add month and year validations in limit
 end

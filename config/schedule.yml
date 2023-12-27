@@ -1,0 +1,4 @@
+disbursement_job:
+  # TODO: Move this to every day 8:00 AM.
+  cron: "*/1 * * * *" # execute at every 30 minutes
+  class: "DisbursementJob"

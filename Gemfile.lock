@@ -94,11 +94,16 @@ GEM
       ruby2_keywords
     error_highlight (0.6.0)
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
     factory_bot (6.4.2)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.2)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    fugit (1.9.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -141,6 +146,7 @@ GEM
       stringio
     puma (6.4.0)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (3.0.8)
     rack-session (2.0.0)
@@ -182,6 +188,8 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
+    redis-client (0.19.1)
+      connection_pool
     reline (0.4.1)
       io-console (~> 0.5)
     rspec-core (3.12.2)
@@ -202,6 +210,15 @@ GEM
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
     ruby2_keywords (0.0.5)
+    sidekiq (7.2.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
+    sidekiq-cron (1.12.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     stringio (3.1.0)
     thor (1.3.0)
     timeout (0.4.1)
@@ -228,6 +245,8 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.2)
   rspec-rails
+  sidekiq (~> 7.2)
+  sidekiq-cron
   tzinfo-data
 
 RUBY VERSION

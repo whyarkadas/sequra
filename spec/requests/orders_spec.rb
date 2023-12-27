@@ -7,12 +7,10 @@ RSpec.describe "/orders", type: :request do
   let(:merchant) { create(:merchant) }
   let(:valid_attributes) {
     {
-      merchant_id: merchant.id,
+      merchant_reference: "treutel_schumm_fadel",
       amount: 61.74,
       creation_date: "2022-01-01",
-      disbursement_id: nil,
-      id_key:"056d024481a9",
-      fee: nil
+      id_key:"056d024481a9"
     }
   }
 
@@ -20,9 +18,7 @@ RSpec.describe "/orders", type: :request do
     {
       amount: 61.74,
       creation_date: "2022-01-01",
-      disbursement_id: nil,
-      id_key:"056d024481a9",
-      fee: nil
+      id_key:"056d024481a9"
     }
   }
 
@@ -102,7 +98,7 @@ RSpec.describe "/orders", type: :request do
     end
 
     context "with invalid parameters" do
-      let(:new_invalid_attributes) { { merchant_id: nil } }
+      let(:new_invalid_attributes) { { merchant_reference: nil } }
 
       it "renders a JSON response with errors for the order" do
         order = Order.create! valid_attributes

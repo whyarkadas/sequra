@@ -1,0 +1,11 @@
+id;reference;email;live_on;disbursement_frequency;minimum_monthly_fee
+86312006-4d7e-45c4-9c28-788f4aa68a62;padberg_group;info@padberg-group.com;2023-02-01;DAILY;0.0
+d1649242-a612-46ba-82d8-225542bb9576;deckow_gibson;info@deckow-gibson.com;2022-12-14;DAILY;0.0
+a616488f-c8b2-45dd-b29f-364d12a20238;romaguera_and_sons;info@romaguera-and-sons.com;2022-12-10;DAILY;0.0
+9b6d2b8a-f06c-4298-8f27-f33545eb5899;rosenbaum_parisian;info@rosenbaum-parisian.com;2022-11-09;WEEKLY;15.0
+fa834b62-f143-4805-a2c7-e085eb608e2c;sanford_group;info@sanford-group.com;2022-12-06;DAILY;30.0
+f09a1851-749f-43a3-a137-d02e9525d0d4;mohr_wiza_and_medhurst;info@mohr-wiza-and-medhurst.com;2022-09-26;WEEKLY;15.0
+524a61d5-f73d-4fa9-a3b9-8c6716c542a1;dooley_stracke;info@dooley-stracke.com;2022-10-10;DAILY;15.0
+81805b1d-c10e-4f73-a043-6e2616cb67d2;rosenbaum_kerluke;info@rosenbaum-kerluke.com;2023-01-05;WEEKLY;30.0
+e97d2b5b-a2cd-4973-88a2-1d7584be5ac5;breitenberg_boyer;info@breitenberg-boyer.com;2022-12-20;WEEKLY;0.0
+18139ef0-d162-4034-b43c-5c10791a5608;gerhold_cremin_and_brown;info@gerhold-cremin-and-brown.com;2022-12-22;DAILY;0.0

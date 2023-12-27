@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :order, class: 'Order' do
-    # TODO: Add associations here.
-    merchant_id { 1 }
+    merchant_reference { "treutel_schumm_fadel" }
     amount { 61.74 }
     creation_date {"2023-01-01"}
     id_key { "056d024481a9" }

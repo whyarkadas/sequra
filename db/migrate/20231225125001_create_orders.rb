@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[7.1]
   def change
     create_table :orders do |t|
-      t.integer :merchant_id, null: false, index: true
+      t.string :merchant_reference, null: false, index: true
       t.decimal :amount, null: false, precision: 10, scale: 2
       t.date :creation_date, null: false
       t.integer :disbursement_id, index: { name: 'disbursement_id_index' }

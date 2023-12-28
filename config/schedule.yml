@@ -1,4 +1,5 @@
-disbursement_job:
+scheduled_task_job:
   # TODO: Move this to every day 8:00 AM.
-  cron: "*/1 * * * *" # execute at every 30 minutes
-  class: "DisbursementJob"
+  # cron: "*/1 * * * *" # execute at every 30 minutes
+  cron: "every day at eight" # TODO check if this is running.
+  class: "ScheduledTaskJob"

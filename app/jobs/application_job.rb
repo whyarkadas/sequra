@@ -1,7 +1,14 @@
 class ApplicationJob < ActiveJob::Base
-  # Automatically retry jobs that encountered a deadlock
-  # retry_on ActiveRecord::Deadlocked
+  include ActiveSupport::Rescuable
 
-  # Most jobs are safe to ignore if the underlying records are no longer available
-  # discard_on ActiveJob::DeserializationError
+  queue_as :default
+  # Automatically retry jobs that encountered a deadlock
+  retry_on ActiveRecord::Deadlocked
+  discard_on ActiveJob::DeserializationError
+
+  # TODO: Test this with Retry
+  rescue_from ActiveRecord::RecordNotFound do |error|
+    Rails.logger.error "ActiveRecord::RecordNotFound on Job: #{error}"
+    retry_job wait: 5.minutes
+  end
 end

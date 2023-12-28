@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DisbursementJob, type: :job do
+RSpec.describe ScheduledTaskJob, type: :job do
   include ActiveJob::TestHelper
 
   subject(:job) { described_class.perform_later(123) }
@@ -11,11 +11,11 @@ RSpec.describe DisbursementJob, type: :job do
   end
 
   it 'is in urgent queue' do
-    expect(DisbursementJob.new.queue_name).to eq('default')
+    expect(ScheduledTaskJob.new.queue_name).to eq('default')
   end
 
   it 'executes perform' do
-    expect(DisbursementJob).to receive(:perform_later).with(123)
+    expect(ScheduledTaskJob).to receive(:perform_later).with(123)
     perform_enqueued_jobs { job }
   end
 

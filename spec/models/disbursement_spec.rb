@@ -15,7 +15,7 @@
 #
 # Indexes
 #
-#  unique_merchant  (merchant_id) UNIQUE
+#  disburse_merchant  (merchant_id)
 #
 require 'rails_helper'
 

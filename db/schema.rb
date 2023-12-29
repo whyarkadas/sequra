@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_085823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "monthly_fee", precision: 10, scale: 2, default: "0.0"
-    t.index ["merchant_id"], name: "unique_merchant", unique: true
+    t.index ["merchant_id"], name: "disburse_merchant"
   end
 
   create_table "merchants", force: :cascade do |t|

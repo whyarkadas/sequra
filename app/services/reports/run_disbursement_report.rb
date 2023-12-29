@@ -1,7 +1,13 @@
 module Reports
   class RunDisbursementReport
+    # TODO: Move this to ENV
+    REPORT_FILE_PATH = "tmp/report.csv"
+
+    def initialize
+      init_result_csv
+    end
+
     def run
-      # TODO: queries should be here..
       puts "RunDisbursementReport running"
 
       # - Year
@@ -17,11 +23,31 @@ module Reports
       # - Amount of monthly fee charged (From minimum monthly fee)
       # - Sum(amount) … above query
 
+      result = ActiveRecord::Base.connection.execute(query)
+
+      result.values.each do |yearly_values|
+        pp yearly_values
+        append_to_result_csv(yearly_values)
+      end
     end
 
-    def disbursements_data
-      ActiveRecord::Base.connection.execute(query)
-      # [[2022, 0.87e2, 0.87e2], [2023, 0.58e2, 0.58e2]]
+    def init_result_csv
+      CSV.open(REPORT_FILE_PATH, "w+") do |csv|
+        csv << ["year",
+                "Number of disbursements",
+                "Amount disbursed to merchants",
+                "Amount of order fees"
+                #"Number of monthly fees charged",
+                #"Amount of monthly fee charged"
+              ]
+      end
+    end
+
+    def append_to_result_csv(yearly_result)
+      return if yearly_result.nil?
+      CSV.open(REPORT_FILE_PATH, "a+") do |csv|
+        csv << yearly_result
+      end
     end
 
     def query

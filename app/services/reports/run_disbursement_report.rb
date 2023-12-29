@@ -13,7 +13,7 @@ module Reports
 
       # TODO: Add this to docs.
       Rails.cache.fetch("report/disbursement_results", expires_in: 30.minutes) do
-        disbursement_results = ActiveRecord::Base.connection.execute(disbursement_query).values
+          disbursement_results = ActiveRecord::Base.connection.execute(disbursement_query).values
       end
 
       Rails.cache.fetch("report/monthly_fee_results", expires_in: 30.minutes) do

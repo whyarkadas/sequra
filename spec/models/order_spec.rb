@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: orders
+#
+#  id                 :bigint           not null, primary key
+#  amount             :decimal(10, 2)   not null
+#  creation_date      :date             not null
+#  fee                :decimal(10, 2)   default(0.0)
+#  id_key             :string
+#  merchant_reference :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  disbursement_id    :integer
+#
+# Indexes
+#
+#  disbursement_id_index               (disbursement_id)
+#  index_orders_on_merchant_reference  (merchant_reference)
+#
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do

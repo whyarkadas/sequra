@@ -8,26 +8,11 @@ module Reports
     end
 
     def run
-      puts "RunDisbursementReport running"
+      disbursement_results = ActiveRecord::Base.connection.execute(disbursement_query).values
+      monthly_fee_results = ActiveRecord::Base.connection.execute(monthly_fee_query).values
 
-      # - Year
-      # - Group disbursement based on year
-      # - Number of disbursements
-      # - Count * of query we group above
-      # - Amount disbursed to merchants
-      # - Sum(amount) … above query
-      # - Amount of order fees
-      # - Sum(order_fees) … above query
-      # - Number of monthly fees charged (From minimum monthly fee)
-      # - count(*)…..Group monthly_fee_payment based on year
-      # - Amount of monthly fee charged (From minimum monthly fee)
-      # - Sum(amount) … above query
-
-      result = ActiveRecord::Base.connection.execute(query)
-
-      result.values.each do |yearly_values|
-        pp yearly_values
-        append_to_result_csv(yearly_values)
+      disbursement_results.each_with_index do |disbursement_result, index|
+        append_to_result_csv(disbursement_result, monthly_fee_results[index])
       end
     end
 
@@ -36,27 +21,38 @@ module Reports
         csv << ["year",
                 "Number of disbursements",
                 "Amount disbursed to merchants",
-                "Amount of order fees"
-                #"Number of monthly fees charged",
-                #"Amount of monthly fee charged"
+                "Amount of order fees",
+                "Number of monthly fees charged",
+                "Amount of monthly fee charged"
               ]
       end
     end
 
-    def append_to_result_csv(yearly_result)
-      return if yearly_result.nil?
+    def append_to_result_csv(disbursement_result, monthly_fee_result)
+      return if disbursement_result.nil? || monthly_fee_result.nil?
+
       CSV.open(REPORT_FILE_PATH, "a+") do |csv|
-        csv << yearly_result
+        csv << disbursement_result + monthly_fee_result
       end
     end
 
-    def query
+    def disbursement_query
       <<~SQL
         SELECT "disbursements"."year" AS "disbursements_year",
+               COUNT(*) AS "number_of_disbursements",
                SUM("disbursements"."amount") AS "sum_amount",
-               SUM("disbursements"."fee") AS "sum_amount",
-               SUM("disbursements"."monthly_fee") AS "sum_monthly_fee"
+               SUM("disbursements"."fee") AS "sum_fee"
           FROM "disbursements" GROUP BY "disbursements"."year"
+      SQL
+    end
+
+    def monthly_fee_query
+      <<~SQL
+        SELECT  COUNT(*) AS "number_of_disbursements",
+                SUM("disbursements"."monthly_fee") AS "sum_monthly_fee"
+          FROM "disbursements"
+                WHERE "disbursements"."monthly_fee" > 0 
+                GROUP BY "disbursements"."year"
       SQL
     end
   end

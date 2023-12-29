@@ -1,5 +1,6 @@
 module CsvImport
   class OrderImport < Base
+    # TODO: We might have too much orders so could be done async with sidekiq.
     private
 
     def import_in_batch(rows)

@@ -2,7 +2,7 @@ require 'csv'
 
 module CsvImport
   class Base
-    BULK_IMPORT_BATCH_SIZE = 1_000
+    BULK_IMPORT_BATCH_SIZE = 100
 
     def initialize(csv_path, separator)
       @csv_path = csv_path

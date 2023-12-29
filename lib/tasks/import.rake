@@ -11,7 +11,7 @@ namespace :import do
     desc 'Import orders from CSV to DB'
     task push: :environment do
       csv_path = ENV.fetch('ORDERS_CSV_PATH')
-      CsvImport::OrderImport.new(csv_path, ',').call
+      CsvImport::OrderImport.new(csv_path, ';').call
     end
   end
 end

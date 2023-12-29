@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :orders, class_name: "Order", foreign_key: 'merchant_reference', primary_key: "reference"
+  has_many :disbursements
   has_many :not_disbursed_orders, -> { not_disbursed }, class_name: 'Order',
            foreign_key: 'merchant_reference', primary_key: "reference"
 
@@ -23,13 +24,22 @@ class Merchant < ApplicationRecord
   def disburse
     disbursement_amount = 0
     disbursement_fee = 0
+    monthly_fee = 0
 
     not_disbursed_orders.each do |order|
       disbursement_amount += order.amount
       disbursement_fee += order.amount
     end
 
-    disbursement = DisbursementCreator.new(disbursement_amount, disbursement_fee, id).run
+    if is_first_disbursement_of_month
+      if minimum_monthly_fee > monthly_fee_payment
+        monthly_fee = minimum_monthly_fee - monthly_fee_payment
+      end
+
+      self.update!(monthly_fee_payment: 0)
+    end
+
+    disbursement = DisbursementCreator.new(disbursement_amount.to_f, disbursement_fee.to_f, monthly_fee.to_f, id).run
 
     if disbursement
       update_not_disbursed_orders(disbursement.id)
@@ -43,5 +53,13 @@ class Merchant < ApplicationRecord
     not_disbursed_orders.each do |order|
       order.update(disbursement_id: disbursement_id)
     end
+  end
+
+  def is_first_disbursement_of_month
+    last_disbursements_month == Date.current.month
+  end
+
+  def last_disbursements_month
+    disbursements.order('creation_date DESC').first&.month
   end
 end

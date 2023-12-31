@@ -28,6 +28,12 @@ class Merchant < ApplicationRecord
   validates :reference, presence: true, uniqueness:true
   validates :live_on, presence: true
 
+  after_create :add_scheduled_task
+
+  def add_scheduled_task
+    ScheduledTask.create!(scheduled_at: next_at, merchant_id:id)
+  end
+
   def next_schedule_day
     self.daily? ? Date.tomorrow : Date.current + 7.days
   end

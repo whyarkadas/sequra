@@ -14,6 +14,10 @@ module CsvImport
           )
       end
       Merchant.import!(objs.compact)
+
+      objs.compact.each do |merchant|
+        merchant.run_callbacks(:create) { true }
+      end
     end
   end
 end

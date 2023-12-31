@@ -27,12 +27,11 @@ class Order < ApplicationRecord
   after_create :set_fee
   after_update_commit :set_fee, if: :saved_change_to_amount?
 
-  # TODO: Move these to ENV.
-  FEE_LOWER_LIMIT = 50
-  FEE_UPPER_LIMIT = 300
-  FEE_LOWER_LIMIT_PERCENTAGE = 1.00
-  FEE_MEDIAN_LIMIT_PERCENTAGE = 0.95
-  FEE_UPPER_LIMIT_PERCENTAGE = 0.85
+  FEE_LOWER_LIMIT = ENV.fetch('FEE_LOWER_LIMIT').to_f
+  FEE_UPPER_LIMIT = ENV.fetch('FEE_UPPER_LIMIT').to_f
+  FEE_LOWER_LIMIT_PERCENTAGE = ENV.fetch('FEE_LOWER_LIMIT_PERCENTAGE').to_f
+  FEE_MEDIAN_LIMIT_PERCENTAGE = ENV.fetch('FEE_MEDIAN_LIMIT_PERCENTAGE').to_f
+  FEE_UPPER_LIMIT_PERCENTAGE = ENV.fetch('FEE_UPPER_LIMIT_PERCENTAGE').to_f
 
   def set_fee
     update!(fee: calculate_fee)

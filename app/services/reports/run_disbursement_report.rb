@@ -1,7 +1,6 @@
 module Reports
   class RunDisbursementReport
-    # TODO: Move this to ENV
-    REPORT_FILE_PATH = "tmp/report.csv"
+    REPORT_FILE_PATH = ENV.fetch('ORDERS_CSV_PATH')
 
     def initialize
       init_result_csv

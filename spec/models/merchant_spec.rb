@@ -20,5 +20,23 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject {
+    described_class.new(disbursement_frequency: 1,
+                        live_on: "2022-10-21",
+                        reference: "my_merchant")
+  }
+
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
+
+  it "is not valid without a live_on" do
+    subject.live_on = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a reference" do
+    subject.reference = nil
+    expect(subject).to_not be_valid
+  end
 end

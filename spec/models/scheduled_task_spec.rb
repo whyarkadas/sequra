@@ -31,7 +31,7 @@ RSpec.describe ScheduledTask, :type => :model do
     expect(subject).to_not be_valid
   end
   #
-  it "is not valid without a description" do
+  it "is not valid with scheduled_at before now" do
     subject.scheduled_at = DateTime.now - 1.day
     expect(subject).to_not be_valid
   end

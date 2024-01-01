@@ -5,11 +5,10 @@ RSpec.describe "/scheduled_tasks", type: :request do
   let(:valid_attributes) {
     {
       merchant_id:merchant.id,
-      scheduled_at: "2022-01-01 08:00",
+      scheduled_at: DateTime.now + 1.day,
     }
   }
 
-  # TODO: Add test for scheduled_at in the future validation.
   let(:invalid_attributes) {
     {
       scheduled_at: "2022-01-01 08:00",

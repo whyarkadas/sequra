@@ -14,6 +14,25 @@
 #
 require 'rails_helper'
 
-RSpec.describe ScheduledTask, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe ScheduledTask, :type => :model do
+  let(:merchant) { create(:merchant) }
+  let(:scheduled_time) {  DateTime.now + 1.day }
+  subject {
+    described_class.new(merchant_id: merchant.id,
+                        scheduled_at: scheduled_time)
+  }
+
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
+
+  it "is not valid without a merchant_id" do
+    subject.merchant_id = nil
+    expect(subject).to_not be_valid
+  end
+  #
+  it "is not valid without a description" do
+    subject.scheduled_at = DateTime.now - 1.day
+    expect(subject).to_not be_valid
+  end
 end

@@ -14,5 +14,12 @@
 #
 class ScheduledTask < ApplicationRecord
   belongs_to :merchant, optional: false
-  # TODO: Validate :scheduled_at is in the future.
+  validate :scheduled_at_future
+  validates :merchant_id, presence: true, uniqueness:true
+
+  def scheduled_at_future
+    if scheduled_at < DateTime.now
+      errors.add(:scheduled_at, "must be later than current time")
+    end
+  end
 end

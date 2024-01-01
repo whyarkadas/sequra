@@ -6,5 +6,5 @@ namespace :report do
     end
   end
 
-  # TODO: Might also build monthly report
+  # TODO: Might also build need monthly report in the future.
 end

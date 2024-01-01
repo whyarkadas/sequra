@@ -47,7 +47,7 @@ class Merchant < ApplicationRecord
   end
 
   def disburse_all
-    start_date = live_on.beginning_of_day
+    start_date = last_disbursements&.creation_date || live_on.beginning_of_day
 
     loop do
       end_date = start_date + (self.daily? ? 1.day : 1.week)
@@ -99,10 +99,10 @@ class Merchant < ApplicationRecord
   end
 
   def is_first_disbursement_of_month
-    last_disbursements_month == Date.current.month
+    last_disbursements&.month == Date.current.month
   end
 
-  def last_disbursements_month
-    disbursements.order('creation_date DESC').first&.month
+  def last_disbursements
+    disbursements.order('creation_date DESC').first
   end
 end

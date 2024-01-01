@@ -13,6 +13,10 @@ module CsvImport
         )
       end
       Order.import!(objs.compact)
+
+      objs.compact.each do |order|
+        order.run_callbacks(:create) { true }
+      end
     end
   end
 end

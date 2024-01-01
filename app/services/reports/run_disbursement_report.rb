@@ -1,6 +1,6 @@
 module Reports
   class RunDisbursementReport
-    REPORT_FILE_PATH = ENV.fetch('ORDERS_CSV_PATH')
+    REPORT_FILE_PATH = ENV.fetch('REPORT_FILE_PATH')
 
     def initialize
       init_result_csv
@@ -20,7 +20,8 @@ module Reports
       end
 
       disbursement_results.each_with_index do |disbursement_result, index|
-        append_to_result_csv(disbursement_result, monthly_fee_results[index])
+        monthly_fee_row =  monthly_fee_results[index] || [0,0]
+        append_to_result_csv(disbursement_result, monthly_fee_row)
       end
     end
 

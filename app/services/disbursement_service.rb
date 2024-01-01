@@ -5,7 +5,7 @@ class DisbursementService
 
   def run
     merchant = Merchant.find(@task.merchant_id)
-    merchant.disburse
+    merchant.disburse_all
 
     @task.update(scheduled_at: merchant.next_at)
   end

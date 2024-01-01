@@ -118,6 +118,8 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    groupdate (6.4.0)
+      activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.7.1)
@@ -260,6 +262,7 @@ DEPENDENCIES
   dotenv-rails
   error_highlight (>= 0.4.0)
   factory_bot_rails
+  groupdate
   pg (~> 1.1)
   pry (~> 0.14.2)
   puma (>= 5.0)

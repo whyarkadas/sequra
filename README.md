@@ -86,6 +86,7 @@ Disbursement calculation and build project for Sequra.
 
 ### Result
 
-
-
-
+| Year |	Number of disbursements	| Amount disbursed to merchants	| Amount of order fees	| Number of monthly fees charged	| Amount of monthly fee charged |
+| ---- | ---- | --- | ---- | ---- | --- |
+| 2023	|10.391	|190.273.860,49	|1.709.260,98	|383	|8.646,86 |
+| 2022	|1.509	|37.262.997,42	|333.677,15	|0	|0 |

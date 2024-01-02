@@ -19,7 +19,5 @@ RSpec.describe DisbursementCreator, type: :model do
     end
 
     # TODO: Add failing create test here.
-    #
-    # TODO: Add monthly fee test here.
   end
 end

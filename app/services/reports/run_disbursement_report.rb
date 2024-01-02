@@ -10,7 +10,6 @@ module Reports
       disbursement_results = []
       monthly_fee_results = []
 
-      # TODO: Add this to docs.
       Rails.cache.fetch("report/disbursement_results", expires_in: 30.minutes) do
           disbursement_results = ActiveRecord::Base.connection.execute(disbursement_query).values
       end

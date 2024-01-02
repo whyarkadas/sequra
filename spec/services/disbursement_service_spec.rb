@@ -20,6 +20,5 @@ RSpec.describe DisbursementService, type: :model do
     end
 
       # TODO: check task scheduled_at next
-      # Check order disbursement id
   end
 end

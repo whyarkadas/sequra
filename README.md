@@ -30,6 +30,10 @@ Disbursement calculation and build project for Sequra.
   
 
 ### Local run instructions
+  * Run Sidekiq locally
+    ```
+     bundle exec sidekiq
+    ```
   * Import CSV data to local DB
     * import merchant using provided merchant.csv
     ```
@@ -55,6 +59,7 @@ Disbursement calculation and build project for Sequra.
   * I fetched fee calculation params from ENV file about necessary limits however this can be done with dynamic way so fee calculation rules can be defined from a possible UI and read from DB. With this way user will have chance to change fee calculation rules whenever they want.
   * Need add more test especially for Service for edge cases or any extra validations.
   * Need more detailed instructions and documentation for project.
+  * Possible we might need to have not only yearly report but also might need monthly report.
 
 ### DB Schema
 
@@ -67,3 +72,13 @@ Disbursement calculation and build project for Sequra.
 * ScheduledTask contains list of task for merchant. This task is disbursement task for that merchant.
 * Disbursement is done by MerchantDisbursementService for a Service. This service is checking orders of merchant that is not disbursed yet and add this order to disbursement.
 * If disbursement service is running first time for a Merchant for that month I am checking monthly fee payments of that merchant if this is less than minimum monthlt fee for that merchant I added extra fee for that disbursement.
+
+### Caching
+* I am caching disbursement report for a period because it is better and faster way to provide reports for any case user is trying to run very report frequently and report do not change frequently it only can change daily.
+
+### Technical Choose
+* Choose to implement this project using Rails framework but it is not a must, we can go with just a simple Ruby project because this we do not need any UI or API. However because it is easier and faster way to have some basic functionality, going with Rails way is easier. Also we can go with Ruby project and just add and ORM(like ActiveRecord) and use it
+* As persistence layer I choose to have Postgres because it is open source and provide enough amount of features for project needs.
+* As background processor I choose Sidekiq because it most common and stable tool for Ruby project.
+
+

@@ -10,17 +10,10 @@ class MerchantDisbursementService
   def run
     start_date = merchant.last_disbursements&.creation_date || merchant.live_on.beginning_of_day
 
-    pp merchant.orders.all
-
     loop do
       end_date = start_date + (merchant.daily? ? 1.day : 1.week)
 
-      puts start_date
-      puts end_date
-
-      orders_to_disburse = merchant.orders.where(creation_date: start_date..end_date)
-      puts "orders_to_disburse"
-      puts orders_to_disburse
+      orders_to_disburse = merchant.not_disbursed_orders.where(creation_date: start_date..end_date)
 
       unless orders_to_disburse.empty?
         disburse_orders(orders_to_disburse, end_date)

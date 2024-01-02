@@ -7,4 +7,13 @@ FactoryBot.define do
     creation_date {"2023-01-01"}
     id_key { "056d024481a9" }
   end
+
+  factory :merchant_order, class: 'Order' do
+    trait :merchant do
+      association :merchant, merchant
+    end
+    amount { 61.74 }
+    creation_date {"2023-01-01"}
+    id_key { "056d024481a9" }
+  end
 end

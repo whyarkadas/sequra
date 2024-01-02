@@ -31,11 +31,11 @@ Disbursement calculation and build project for Sequra.
 
 ### Local run instructions
   * Import CSV data to local DB
-    * import merchant using merchant.csv
+    * import merchant using provided merchant.csv
     ```
      rake import:merchant:push
     ```
-    * import orders using orders.csv
+    * import orders using provided orders.csv
     ```
      rake import:order:push
     ```
@@ -51,3 +51,7 @@ Disbursement calculation and build project for Sequra.
     ```
     rake report:disbursement:yearly
     ```
+### Possible TODO list
+  * I fetched fee calculation params from ENV file about necessary limits however this can be done with dyanmic way so fee calculation rules can be defined from a possible UI and read from DB. With this way user will have chance to change fee calculation rules whenever they want.
+  * Need add more test especially for Service for edge cases or any extra validations.
+  * Need more detailed instructions and documentation for project.

@@ -10,5 +10,7 @@ RSpec.describe MerchantDisbursementService, type: :model do
         MerchantDisbursementService.new(merchant).run
       }.not_to raise_error
     end
+
+    # TODO: Need more test here.
   end
 end

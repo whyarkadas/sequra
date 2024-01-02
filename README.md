@@ -55,3 +55,8 @@ Disbursement calculation and build project for Sequra.
   * I fetched fee calculation params from ENV file about necessary limits however this can be done with dyanmic way so fee calculation rules can be defined from a possible UI and read from DB. With this way user will have chance to change fee calculation rules whenever they want.
   * Need add more test especially for Service for edge cases or any extra validations.
   * Need more detailed instructions and documentation for project.
+
+### DB Schema
+
+![ar_internal_metadata](https://github.com/whyarkadas/sequra/assets/38353086/4d687312-d836-4b2b-9e35-515f8269682d)
+

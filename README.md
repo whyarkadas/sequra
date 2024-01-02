@@ -73,6 +73,9 @@ Disbursement calculation and build project for Sequra.
 * Disbursement is done by MerchantDisbursementService for a Service. This service is checking orders of merchant that is not disbursed yet and add this order to disbursement.
 * If disbursement service is running first time for a Merchant for that month I am checking monthly fee payments of that merchant if this is less than minimum monthlt fee for that merchant I added extra fee for that disbursement.
 
+* Producing report
+  * To produce yearly report user just need to run just yearly report rake task(report:disbursement:yearly)
+
 ### Caching
 * I am caching disbursement report for a period because it is better and faster way to provide reports for any case user is trying to run very report frequently and report do not change frequently it only can change daily.
 
@@ -80,5 +83,9 @@ Disbursement calculation and build project for Sequra.
 * Choose to implement this project using Rails framework but it is not a must, we can go with just a simple Ruby project because this we do not need any UI or API. However because it is easier and faster way to have some basic functionality, going with Rails way is easier. Also we can go with Ruby project and just add and ORM(like ActiveRecord) and use it
 * As persistence layer I choose to have Postgres because it is open source and provide enough amount of features for project needs.
 * As background processor I choose Sidekiq because it most common and stable tool for Ruby project.
+
+### Result
+
+
 
 

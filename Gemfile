@@ -40,12 +40,15 @@ gem "groupdate"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
+#
+group :development, :test do
+  gem 'pry', '~> 0.14.2'
+end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
-  gem 'pry', '~> 0.14.2'
   gem 'annotate'
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end

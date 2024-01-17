@@ -41,7 +41,7 @@ RSpec.describe "/scheduled_tasks", type: :request do
         expect {
           post scheduled_tasks_url,
                params: { scheduled_task: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(ScheduledTask, :count).by(1)
+        }.to change(ScheduledTask, :count).by(2) ## Becase merchant has after create callback to create ScheduledTask also.
       end
 
       it "renders a JSON response with the new scheduled_task" do
@@ -72,7 +72,7 @@ RSpec.describe "/scheduled_tasks", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        { scheduled_at: "2022-01-01 09:00" }
+        { scheduled_at: "2025-01-01 09:00" }
       }
 
       it "updates the requested scheduled_task" do
@@ -80,7 +80,7 @@ RSpec.describe "/scheduled_tasks", type: :request do
         patch scheduled_task_url(scheduled_task),
               params: { scheduled_task: new_attributes }, headers: valid_headers, as: :json
         scheduled_task.reload
-        expect(scheduled_task.scheduled_at.to_s).to eq("2022-01-01 09:00:00 UTC")
+        expect(scheduled_task.scheduled_at.to_s).to eq("2025-01-01 09:00:00 UTC")
       end
 
       it "renders a JSON response with the scheduled_task" do

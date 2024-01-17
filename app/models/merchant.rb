@@ -19,7 +19,12 @@
 #
 class Merchant < ApplicationRecord
   has_many :orders, class_name: "Order", foreign_key: 'merchant_reference', primary_key: "reference"
+  has_many :order_cancellations, class_name: "OrderCancellation", foreign_key: 'merchant_reference', primary_key: "reference"
   has_many :disbursements
+
+  has_many :not_disbursed_order_cancellations, -> { not_disbursed }, class_name: 'OrderCancellation',
+           foreign_key: 'merchant_reference', primary_key: "reference"
+
   has_many :not_disbursed_orders, -> { not_disbursed }, class_name: 'Order',
            foreign_key: 'merchant_reference', primary_key: "reference"
 
@@ -56,8 +61,9 @@ class Merchant < ApplicationRecord
     end
   end
 
-  def is_first_disbursement_of_month
-    last_disbursements&.month == Date.current.month
+  def is_first_disbursement_of_month(disbursement_date)
+    return false if last_disbursements.nil?
+    last_disbursements&.month != disbursement_date.month
   end
 
   def last_disbursements

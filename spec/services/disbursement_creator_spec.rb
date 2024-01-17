@@ -6,15 +6,16 @@ RSpec.describe DisbursementCreator, type: :model do
     let(:disbursement_amount) { 25.00 }
     let(:disbursement_fee) { 3.00 }
     let(:monthly_fee) { 5.00 }
+    let(:disbursement_date) { DateTime.now }
 
     it 'valid params' do
       expect {
-        DisbursementCreator.new(disbursement_amount, disbursement_fee, monthly_fee, merchant.id).run
+        DisbursementCreator.new(disbursement_amount, disbursement_fee, monthly_fee, merchant.id, disbursement_date).run
       }.to change(Disbursement, :count).by(1)
     end
 
     it 'valid params, attribute check' do
-      disbursement = DisbursementCreator.new(disbursement_amount, disbursement_fee, monthly_fee, merchant.id).run
+      disbursement = DisbursementCreator.new(disbursement_amount, disbursement_fee, monthly_fee, merchant.id, disbursement_date).run
       expect(disbursement.amount).to eq(disbursement_amount)
     end
 

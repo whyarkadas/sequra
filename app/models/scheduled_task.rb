@@ -15,7 +15,6 @@
 class ScheduledTask < ApplicationRecord
   belongs_to :merchant, optional: false
   validate :scheduled_at_future
-  validates :merchant_id, presence: true, uniqueness:true
 
   def scheduled_at_future
     if scheduled_at < DateTime.now

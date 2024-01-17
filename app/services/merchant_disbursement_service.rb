@@ -14,9 +14,10 @@ class MerchantDisbursementService
       end_date = start_date + (merchant.daily? ? 1.day : 1.week)
 
       orders_to_disburse = merchant.not_disbursed_orders.where(creation_date: start_date..end_date)
+      canceled_orders_to_disburse = merchant.not_disbursed_order_cancellations.where(creation_date: start_date..end_date)
 
-      unless orders_to_disburse.empty?
-        disburse_orders(orders_to_disburse, end_date)
+      if orders_to_disburse.present? || canceled_orders_to_disburse.present?
+        disburse_orders(orders_to_disburse, canceled_orders_to_disburse, end_date)
       end
 
       start_date = end_date
@@ -24,7 +25,7 @@ class MerchantDisbursementService
     end
   end
 
-  def disburse_orders(orders_to_disburse, end_date)
+  def disburse_orders(orders_to_disburse, canceled_orders_to_disburse, end_date)
     disbursement_amount = 0
     disbursement_fee = 0
     monthly_fee = 0
@@ -34,15 +35,21 @@ class MerchantDisbursementService
       disbursement_fee += order.fee
     end
 
-    if merchant.is_first_disbursement_of_month
+    canceled_orders_to_disburse.each do |cancelled_order|
+      disbursement_amount -= cancelled_order.amount
+      disbursement_fee -= cancelled_order.fee
+    end
+
+    if merchant.is_first_disbursement_of_month(end_date)
       if merchant.minimum_monthly_fee > merchant.monthly_fee_payment
         monthly_fee = merchant.minimum_monthly_fee - merchant.monthly_fee_payment
       end
 
-      self.update!(monthly_fee_payment: 0)
+      merchant.update!(monthly_fee_payment: 0)
     end
 
-    disbursement = DisbursementCreator.new(disbursement_amount.to_f, disbursement_fee.to_f, monthly_fee.to_f, id, end_date).run
+    disbursement = DisbursementCreator.new(disbursement_amount.to_f, disbursement_fee.to_f,
+                                           monthly_fee.to_f, merchant.id, end_date).run
 
     if disbursement
       merchant.update_orders_disbursement(orders_to_disburse, disbursement.id)

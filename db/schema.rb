@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_29_085823) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_16_141306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_085823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reference"], name: "unique_reference", unique: true
+  end
+
+  create_table "order_cancellations", force: :cascade do |t|
+    t.string "merchant_reference", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.date "creation_date", null: false
+    t.integer "disbursement_id"
+    t.string "id_key"
+    t.decimal "fee", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.index ["disbursement_id"], name: "disbursement_id_cancellation_index"
+    t.index ["merchant_reference"], name: "index_order_cancellations_on_merchant_reference"
   end
 
   create_table "orders", force: :cascade do |t|
